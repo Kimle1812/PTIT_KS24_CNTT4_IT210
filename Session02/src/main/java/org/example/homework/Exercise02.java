@@ -1,4 +1,4 @@
-package org.example.ss02.btvn;
+package org.example.homework;
 
 import com.mysql.cj.xdevapi.Client;
 

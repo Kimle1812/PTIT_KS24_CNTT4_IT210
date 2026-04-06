@@ -1,4 +1,4 @@
-package org.example.ss02.btvn;
+package org.example.homework;
 
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.http.HttpSession;

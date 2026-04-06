@@ -1,4 +1,4 @@
-package org.example.ss02.btvn;
+package org.example.homework;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;

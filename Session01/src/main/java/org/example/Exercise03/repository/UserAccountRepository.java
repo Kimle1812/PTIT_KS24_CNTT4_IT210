@@ -1,4 +1,4 @@
-package org.example.homework03.repository;
+package org.example.Exercise03.repository;
 
 public interface UserAccountRepository {
     double getBalance(String userId);

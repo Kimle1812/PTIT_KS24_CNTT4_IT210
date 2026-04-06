@@ -1,8 +1,8 @@
 
-package org.example.homework03.service;
+package org.example.Exercise03.service;
 
-import org.example.homework03.repository.InventoryRepository;
-import org.example.homework03.repository.UserAccountRepository;
+import org.example.Exercise03.repository.InventoryRepository;
+import org.example.Exercise03.repository.UserAccountRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

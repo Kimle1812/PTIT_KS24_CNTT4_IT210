@@ -1,4 +1,4 @@
-package org.example.ss02.btvn;
+package org.example.homework;
 
 /**
  * PHẦN 1: BÁO CÁO PHÂN TÍCH BẢO MẬT (SECURITY REPORT)

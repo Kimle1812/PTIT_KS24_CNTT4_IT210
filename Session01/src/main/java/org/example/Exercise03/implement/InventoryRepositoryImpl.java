@@ -1,6 +1,6 @@
-package org.example.homework03.implement;
+package org.example.Exercise03.implement;
 
-import org.example.homework03.repository.InventoryRepository;
+import org.example.Exercise03.repository.InventoryRepository;
 import org.springframework.stereotype.Repository;
 import java.util.HashMap;
 import java.util.Map;

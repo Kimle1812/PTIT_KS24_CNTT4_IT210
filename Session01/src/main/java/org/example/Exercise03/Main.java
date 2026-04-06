@@ -1,5 +1,5 @@
 
-package org.example.homework03;
+package org.example.Exercise03;
 
 import org.example.homework03.configs.AppConfig;
 import org.example.homework03.service.OrderFoodService;

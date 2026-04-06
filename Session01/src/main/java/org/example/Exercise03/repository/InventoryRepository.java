@@ -1,4 +1,4 @@
-package org.example.homework03.repository;
+package org.example.Exercise03.repository;
 
 public interface InventoryRepository {
     int getStock(String foodName);
