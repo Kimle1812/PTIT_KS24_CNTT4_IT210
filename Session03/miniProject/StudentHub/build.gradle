@@ -1,0 +1,43 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.13.2'
+}
+
+sourceCompatibility = '21'
+targetCompatibility = '21'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    // 1. Chỉ dùng Jakarta Servlet API (Xóa javax đi)
+    compileOnly('jakarta.servlet:jakarta.servlet-api:6.0.0')
+
+    // 2. Nâng cấp Spring WebMVC lên bản 6.x để tương thích với Tomcat 10
+    implementation("org.springframework:spring-webmvc:6.1.4")
+
+    // 3. MySQL Connector
+    implementation("com.mysql:mysql-connector-j:8.3.0")
+
+    // 4. JSTL (Chỉ dùng chuẩn Jakarta)
+    implementation("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.0")
+    runtimeOnly("org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
+test {
+    useJUnitPlatform()
+}
