@@ -1,0 +1,53 @@
+plugins {
+    id 'java'
+    id 'war'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.13.2'
+}
+
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+dependencies {
+    // thư viện trên manenrepository
+// 1. Spring MVC
+// Source: https://mvnrepository.com/artifact/org.springframework/spring-webmvc
+    implementation("org.springframework:spring-webmvc:7.0.6")
+// nếu ai không hiện class AbstractAnnotation... ở file WebInit thì thay thế
+// phiên bản spring-webmvc xuống tầm 5.x.x
+
+// 2. JSP-API
+// Source: https://mvnrepository.com/artifact/jakarta.servlet.jsp/jakarta.servlet.jsp-api
+    implementation("jakarta.servlet.jsp:jakarta.servlet.jsp-api:3.1.1")
+
+// 3. JSTL-API
+// Source: https://mvnrepository.com/artifact/jakarta.servlet.jsp.jstl/jakarta.servlet.jsp.jstl-api
+    implementation("jakarta.servlet.jsp.jstl:jakarta.servlet.jsp.jstl-api:3.0.2")
+
+// 4. JSTL
+    // Source: https://mvnrepository.com/artifact/org.glassfish.web/jakarta.servlet.jsp.jstl
+    implementation("org.glassfish.web:jakarta.servlet.jsp.jstl:3.0.1")
+
+
+    compileOnly('jakarta.servlet:jakarta.servlet-api:6.1.0')
+
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+}
+
+test {
+    useJUnitPlatform()
+}
