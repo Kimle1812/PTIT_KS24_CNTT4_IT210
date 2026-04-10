@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Chi tiết khóa học</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h3 th:text="${course.name}">Tên khóa học</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-8">
+                    <h5>Lộ trình học (Description):</h5>
+                    <p th:text="${course.description}"></p>
+
+                    <table class="table table-bordered mt-4">
+                        <tr>
+                            <th>Mã khóa học</th>
+                            <td th:text="${course.code}"></td>
+                        </tr>
+                        <tr>
+                            <th>Giảng viên</th>
+                            <td th:text="${course.instructor}"></td>
+                        </tr>
+                        <tr>
+                            <th>Thời lượng</th>
+                            <td th:text="${course.duration}"></td>
+                        </tr>
+                        <tr>
+                            <th>Học phí</th>
+                            <td th:text="${#numbers.formatDecimal(course.price, 0, 'POINT', 0, 'COMMA')} + ' VNĐ'"></td>
+                        </tr>
+                        <tr>
+                            <th>Ngày khai giảng</th>
+                            <td th:text="${#temporals.format(course.startDate, 'dd/MM/yyyy')}"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="alert alert-warning" th:if="${course.isFull}">
+                        <h4 class="alert-heading">HẾT CHỖ</h4>
+                        <p>Khóa học này đã đủ số lượng học viên đăng ký.</p>
+                    </div>
+                    <div class="alert alert-success" th:unless="${course.isFull}">
+                        <h4 class="alert-heading">CÒN CHỖ</h4>
+                        <p>Hãy nhanh tay đăng ký để nhận ưu đãi!</p>
+                        <button class="btn btn-lg btn-block btn-success">Đăng ký ngay</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <a th:href="@{/course/list}" class="btn btn-secondary">Quay lại danh sách</a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Chỉnh sửa khóa học</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h2 class="mb-4">Chỉnh sửa khóa học: <span th:text="${course.name}"></span></h2>
+
+    <form th:action="@{/course/update}" method="post">
+        <!-- Hidden fields to pass all course properties -->
+        <input type="hidden" name="id" th:value="${course.id}" />
+        <input type="hidden" name="name" th:value="${course.name}" />
+        <input type="hidden" name="code" th:value="${course.code}" />
+        <input type="hidden" name="level" th:value="${course.level}" />
+        <input type="hidden" name="description" th:value="${course.description}" />
+        <input type="hidden" name="instructor" th:value="${course.instructor}" />
+        <input type="hidden" name="duration" th:value="${course.duration}" />
+        <input type="hidden" name="isFull" th:value="${course.isFull}" />
+        <input type="hidden" name="studentCount" th:value="${course.studentCount}" />
+
+        <div class="form-group">
+            <label for="price">Học phí:</label>
+            <input type="number" id="price" name="price" th:value="${course.price}" class="form-control" required>
+        </div>
+        <div class="form-group">
+            <label for="startDate">Ngày khai giảng:</label>
+            <input type="date" id="startDate" name="startDate" th:value="${course.startDate}" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+        <a th:href="@{/course/list}" class="btn btn-secondary">Hủy</a>
+    </form>
+</div>
+</body>
+</html>

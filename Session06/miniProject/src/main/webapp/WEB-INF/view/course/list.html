@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main-layout}">
+<head>
+    <title>Danh sách khóa học</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <h2 class="mb-4">Danh sách khóa học</h2>
+
+    <form th:action="@{/course/list}" method="get" class="form-inline mb-4">
+        <div class="form-group mr-3">
+            <label for="level" class="mr-2">Level:</label>
+            <select id="level" name="level" class="form-control">
+                <option value="">Tất cả</option>
+                <option value="Beginner" th:selected="${level == 'Beginner'}">Beginner</option>
+                <option value="Intermediate" th:selected="${level == 'Intermediate'}">Intermediate</option>
+                <option value="Advanced" th:selected="${level == 'Advanced'}">Advanced</option>
+            </select>
+        </div>
+        <div class="form-group mr-3">
+            <label for="maxPrice" class="mr-2">Học phí tối đa:</label>
+            <input type="number" id="maxPrice" name="maxPrice" class="form-control" th:value="${maxPrice}">
+        </div>
+        <button type="submit" class="btn btn-primary">Lọc</button>
+    </form>
+
+    <div th:if="${message}" class="alert alert-success" role="alert">
+        <p th:text="${message}"></p>
+    </div>
+    <div th:if="${error}" class="alert alert-danger" role="alert">
+        <p th:text="${error}"></p>
+    </div>
+
+    <div th:if="${#lists.isEmpty(courses)}" class="alert alert-info">
+        Hiện chưa có lớp học phù hợp với trình độ này.
+    </div>
+
+    <div th:unless="${#lists.isEmpty(courses)}">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>Mã khóa học</th>
+                <th>Tên khóa học</th>
+                <th>Level</th>
+                <th>Học phí</th>
+                <th>Giảng viên</th>
+                <th>Thời lượng</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="course : ${courses}">
+                <td th:text="${course.code}"></td>
+                <td><a th:href="@{/course/detail/{code}(code=${course.code})}" th:text="${course.name}"></a></td>
+                <td th:text="${course.level}"></td>
+                <td th:text="${#numbers.formatDecimal(course.price, 0, 'POINT', 0, 'COMMA')} + ' VNĐ'"></td>
+                <td th:text="${course.instructor}"></td>
+                <td th:text="${course.duration}"></td>
+                <td>
+                    <span th:if="${course.isFull}" class="badge badge-danger">HẾT CHỖ</span>
+                    <span th:unless="${course.isFull}" class="badge badge-success">CÒN CHỖ</span>
+                </td>
+                <td>
+                    <a th:href="@{/course/edit/{code}(code=${course.code})}" class="btn btn-sm btn-warning">Sửa</a>
+                    <form th:action="@{/course/delete/{id}(id=${course.id})}" method="post" style="display:inline;">
+                        <button type="submit" class="btn btn-sm btn-danger"
+                                onclick="return confirm('Bạn có chắc chắn muốn hủy khóa học này?');">Hủy khóa học</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
