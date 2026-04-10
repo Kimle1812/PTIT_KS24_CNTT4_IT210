@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Chi tiết sách</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div th:replace="layout/header :: headerContent(${pageTitle})"></div>
+
+<div class="container">
+    <div th:if="${book != null}">
+        <h3>Thông tin chi tiết</h3>
+        <ul class="list-group">
+            <li class="list-group-item">ID: <span th:text="${book.bookId}"></span></li>
+            <li class="list-group-item">Tên sách: <span th:text="${book.bookName}"></span></li>
+            <li class="list-group-item">Tác giả: <span th:text="${book.author}"></span></li>
+            <li class="list-group-item">Giá: <strong th:text="${book.price}"></strong> VNĐ</li>
+        </ul>
+        <br>
+        <a href="/books" class="btn btn-secondary">Quay lại danh sách</a>
+    </div>
+
+    <div th:unless="${book != null}" class="alert alert-danger">
+        Không tìm thấy sách!
+    </div>
+</div>
+</body>
+</html>

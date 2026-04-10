@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${pageTitle}">Danh sách sách</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <style>
+        .high-price { background-color: yellow !important; }
+    </style>
+</head>
+<body>
+<div th:replace="layout/header :: headerContent(${pageTitle})"></div>
+
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Tên sách</th>
+            <th>Tác giả</th>
+            <th>Giá bán</th>
+            <th>Hành động</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="b : ${books}" th:classappend="${b.price >= 300000} ? 'high-price' : ''">
+            <td th:text="${b.bookId}"></td>
+            <td th:text="${b.bookName}"></td>
+            <td th:text="${b.author}"></td>
+            <td th:text="${b.price} + ' VNĐ'"></td>
+            <td>
+                <a th:href="@{/books/{id}(id=${b.bookId})}" class="btn btn-primary btn-sm">Xem chi tiết</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
