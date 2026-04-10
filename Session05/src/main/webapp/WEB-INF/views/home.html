@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<!---->
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Nguyễn Thị Kim Lệ</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Stock</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="p : ${shop}">
+                <td th:text="${p.id}"></td>
+                <td th:text="${p.name}></td>
+                <td th:text="${p.price}></td>
+                <td th:text="${p.stock}></td>
+                <td th:text="${p.status ? "Con ban" : "Het hang"}></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>
